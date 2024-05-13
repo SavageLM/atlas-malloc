@@ -1,4 +1,4 @@
-##**Project**'C - Malloc'
+# C - Malloc
 
 ## Introduction
 > This README is for the C - Malloc project at Atlas.
@@ -24,5 +24,5 @@
 |free.c| Function(s) for freeing allocated memory|
 
 #### Authors
-Sammy Ansari
+Sammy Ansari    
 Logan Savage
