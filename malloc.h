@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * struct block_head
+*/
 typedef struct block_head
 {
     size_t total_bytes;
