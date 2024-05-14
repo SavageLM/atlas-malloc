@@ -6,12 +6,14 @@
 #include <unistd.h>
 
 /**
- * struct block_head
+ * struct block_head - stores metadata for each block
+ * @total_bytes: total number of bytes occupied
+ * @used_bytes: number of occupied bytes used
 */
 typedef struct block_head
 {
-    size_t total_bytes;
-    size_t used_bytes;
+	size_t total_bytes;
+	size_t used_bytes;
 } blockhead;
 
 /*Prototypes*/

@@ -18,5 +18,6 @@ void *naive_malloc(size_t size)
 	if (prev_break == (void *) -1)
 		return (NULL);
 	allocated += size;
-	return (prev_break);
+	brk(prev_break + allocated + 0x10);
+	return (prev_break + allocated + 0x10);
 }
