@@ -16,6 +16,19 @@ typedef struct block_head
 	size_t used_bytes;
 } blockhead;
 
+/**
+ * struct heap_data - Struct for storing heap data
+ * @first_block: pointer to first block of metadata
+ * @heap_size: Total size of the heap
+ * @numblock: The number of blocks in the heap
+*/
+typedef struct heap_data
+{
+	blockhead *first_block;
+	size_t heap_size;
+	size_t numblock;
+} heap_data;
+
 /*Prototypes*/
 void *naive_malloc(size_t size);
 void *_malloc(size_t size);
