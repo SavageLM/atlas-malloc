@@ -10,13 +10,13 @@ heap_data heap;
 
 void *_malloc(size_t size)
 {
-	static int flag = 0;
-	size_t aligned_sz = ((size + 7)/8) * 8;
+	static int flag;
+	size_t aligned_sz = ((size + 7) / 8) * 8;
 	blockhead *ptr;
 
 	if (!flag)
 	{
-		heap.first_block =sbrk(0);
+		heap.first_block = sbrk(0);
 		sbrk(getpagesize());
 		heap.heap_size = getpagesize();
 		heap.first_block->total_bytes = aligned_sz;
@@ -27,7 +27,7 @@ void *_malloc(size_t size)
 		flag = 1;
 		return ((void *) ptr);
 	}
-	if (heap.heap_free - aligned_sz < 1)
+	while (heap.heap_free - (aligned_sz + BLOCK_SZ) < 1)
 	{
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize();
