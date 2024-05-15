@@ -8,7 +8,7 @@ heap_data heap;
  * Return: returns a pointer to the allocated memory
 */
 
-void *naive_malloc(size_t size)
+void *_malloc(size_t size)
 {
 	static int flag = 0;
 	size_t aligned_sz = ((size + 7)/8) * 8;
