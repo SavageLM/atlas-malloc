@@ -17,8 +17,12 @@ void *_malloc(size_t size)
 	if (!flag)
 	{
 		heap.first_block = sbrk(0);
-		sbrk(getpagesize());
-		heap.heap_size = getpagesize();
+		heap.heap_size = 0, heap.heap_free = 0;
+		while (heap.heap_size < (aligned_sz + BLOCK_SZ))
+		{
+			sbrk(getpagesize());
+			heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
+		}
 		heap.first_block->total_bytes = aligned_sz;
 		heap.first_block->used_bytes = aligned_sz;
 		heap.heap_free = heap.heap_size - aligned_sz;
@@ -30,8 +34,7 @@ void *_malloc(size_t size)
 	while (heap.heap_free - (aligned_sz + BLOCK_SZ) < 1)
 	{
 		sbrk(getpagesize());
-		heap.heap_size += getpagesize();
-		heap.heap_free += getpagesize();
+		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	ptr->total_bytes = aligned_sz;
