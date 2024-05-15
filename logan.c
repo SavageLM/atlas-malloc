@@ -8,7 +8,7 @@ heap_data heap;
  * Return: returns a pointer to the allocated memory
 */
 
-void *_malloc(size_t size)
+void *naive_malloc(size_t size)
 {
 	static int flag = 0;
 	size_t aligned_sz = ((size + 7)/8) * 8;
@@ -27,7 +27,7 @@ void *_malloc(size_t size)
 		flag = 1;
 		return ((void *) ptr);
 	}
-	if (heap.heap_free - aligned_sz < 0)
+	if (heap.heap_free - aligned_sz < 1)
 	{
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize();
