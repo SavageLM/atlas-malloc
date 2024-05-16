@@ -41,6 +41,7 @@ void *_malloc(size_t size)
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	ptr++;
 	heap.numblock++;
+	heap.heap_free -= (BLOCK_SZ + aligned_sz);
 	return ((void *)ptr);
 }
 
