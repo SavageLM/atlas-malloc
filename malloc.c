@@ -50,24 +50,24 @@ void *_malloc(size_t size)
 */
 blockhead *block_hopper(size_t size)
 {
-	size_t i = 0, tmp1 = 0, tmp2 = 0;
+	size_t i = 0, total = 0, used = 0;
 	blockhead *pos;
 
 	for (pos = heap.first_block; i < heap.numblock; i++)
 	{
 		if (pos->total_bytes >= size && !pos->used_bytes)
 			return (pos);
-		tmp1 = pos->total_bytes;
-		tmp2 = pos->used_bytes;
+		total = pos->total_bytes;
+		used = pos->used_bytes;
 		if (size <= (pos->total_bytes - pos->used_bytes))
 		{
 			/* pos->total_bytes = pos->used_bytes; */
-			pos = (blockhead *)((char *)pos + sizeof(blockhead) + tmp1);
-			pos->total_bytes = tmp1 - tmp2 - BLOCK_SZ;
+			pos = (blockhead *)((char *)pos + sizeof(blockhead) + total);
+			pos->total_bytes = total - used - BLOCK_SZ;
 			pos->used_bytes = size - BLOCK_SZ;
 			return (pos);
 		}
-		pos = (blockhead *)((char *)pos + sizeof(blockhead) + tmp1);
+		pos = (blockhead *)((char *)pos + sizeof(blockhead) + total);
 	}
 	pos->total_bytes = size - BLOCK_SZ;
 	pos->used_bytes = size - BLOCK_SZ;
