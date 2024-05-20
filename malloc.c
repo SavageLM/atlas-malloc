@@ -25,7 +25,7 @@ void *_malloc(size_t size)
 		}
 		heap.first_block->total_bytes = aligned_sz;
 		heap.first_block->used_bytes = aligned_sz;
-		heap.heap_free = heap.heap_size - aligned_sz;
+		heap.heap_free = heap.heap_size - (BLOCK_SZ + aligned_sz);
 		heap.numblock = 1;
 		ptr = heap.first_block += 1;
 		flag = 1;
