@@ -3,12 +3,12 @@
 static heap_data heap = {NULL, NULL, 0, 0, 0};
 
 /**
- * _malloc - Allocates memory in the heap
+ * naive_malloc - Allocates memory in the heap
  * @size: size of memory to allocate
  * Return: returns a pointer to the allocated memory
 */
 
-void *_malloc(size_t size)
+void *naive_malloc(size_t size)
 {
 	static int flag;
 	size_t aligned_sz = ((size + 7) / 8) * 8;
