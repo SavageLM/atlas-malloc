@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-static heap_data heap = {NULL, 0, 0, 0};
+heap_data heap;
 
 /**
  * _malloc - Allocates memory in the heap
@@ -17,6 +17,7 @@ void *_malloc(size_t size)
 	if (!flag)
 	{
 		heap.first_block = sbrk(0);
+		heap.heap_size = 0, heap.heap_free = 0;
 		while (heap.heap_size < (aligned_sz + BLOCK_SZ))
 		{
 			sbrk(getpagesize());
@@ -24,10 +25,9 @@ void *_malloc(size_t size)
 		}
 		heap.first_block->total_bytes = aligned_sz;
 		heap.first_block->used_bytes = aligned_sz;
-		heap.heap_free = heap.heap_size - (BLOCK_SZ + aligned_sz);
+		heap.heap_free = heap.heap_size - aligned_sz;
 		heap.numblock = 1;
-		ptr = heap.first_block;
-		ptr++;
+		ptr = heap.first_block += 1;
 		flag = 1;
 		return ((void *) ptr);
 	}
@@ -41,7 +41,6 @@ void *_malloc(size_t size)
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	ptr++;
 	heap.numblock++;
-	heap.heap_free -= (BLOCK_SZ + aligned_sz);
 	return ((void *)ptr);
 }
 
