@@ -12,7 +12,7 @@
 /*Structs*/
 
 /**
- * struct block_head - stores metadata for each block
+ * struct naive_block - stores metadata for each block
  * @total_bytes: total number of bytes allocated
 */
 typedef struct naive_block
