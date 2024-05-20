@@ -7,7 +7,7 @@
 
 /*MACROS*/
 #define NAIVEBLOCK_SZ 8
-#define BLOCK_SZ 16
+#define BLOCK_SZ sizeof(blockhead)
 
 /*Structs*/
 
