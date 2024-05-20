@@ -22,6 +22,8 @@
 |naive_malloc.c| Function(s) for a simple memory allocation|
 |malloc.c| Function(s) for recreating a malloc function|
 |free.c| Function(s) for freeing allocated memory|
+|calloc.c| Function(s) for recreating the calloc function|
+|realloc.c| Function(s) for recreating the realloc function|
 
 #### Authors
 Sammy Ansari    

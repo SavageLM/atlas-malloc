@@ -1,6 +1,7 @@
 #ifndef _MALLOC_H_
 #define _MALLOC_H_
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

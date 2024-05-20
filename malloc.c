@@ -1,6 +1,10 @@
 #include "malloc.h"
 
+void make_lock(void) __attribute__((constructor));
+void break_lock(void) __attribute__((destructor));
+
 static heap_data heap = {NULL, NULL, 0, 0, 0};
+pthread_mutex_t lock;
 
 /**
  * _malloc - Allocates memory in the heap
@@ -14,6 +18,7 @@ void *_malloc(size_t size)
 	size_t aligned_sz = ((size + 7) / 8) * 8;
 	blockhead *ptr = NULL;
 
+	pthread_mutex_lock(&lock);
 	if (!flag)
 	{
 		heap.first_block = sbrk(0);
@@ -28,6 +33,7 @@ void *_malloc(size_t size)
 		heap.numblock = 1;
 		ptr = heap.first_block + 1;
 		flag = 1;
+		pthread_mutex_unlock(&lock);
 		return ((void *) ptr);
 	}
 	while ((aligned_sz + BLOCK_SZ) > heap.heap_free)
@@ -38,6 +44,7 @@ void *_malloc(size_t size)
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	heap.numblock++;
 	heap.heap_free -= (BLOCK_SZ + aligned_sz);
+	pthread_mutex_unlock(&lock);
 	return ((void *) ++ptr);
 }
 
@@ -71,4 +78,20 @@ blockhead *block_hopper(size_t size)
 	pos->total_bytes = size - BLOCK_SZ;
 	pos->used_bytes = size - BLOCK_SZ;
 	return (pos);
+}
+
+/**
+ * make_lock - Constructor for mutex lock
+*/
+void make_lock(void)
+{
+	pthread_mutex_init(&lock, NULL);
+}
+
+/**
+ * break_lock - Destructor for mutex lock
+*/
+void break_lock(void)
+{
+	pthread_mutex_destroy(&lock);
 }
