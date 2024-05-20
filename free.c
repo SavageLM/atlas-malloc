@@ -1,5 +1,4 @@
 #include "malloc.h"
-#include "malloc.c"
 
 /**
  * _free - Function to free a piece of memory
