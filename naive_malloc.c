@@ -34,13 +34,10 @@ void *naive_malloc(size_t size)
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
-	/* ptr->total_bytes = aligned_sz; */
-	/* ptr->used_bytes = aligned_sz; */
 	ptr = naive_hopper((NAIVEBLOCK_SZ + aligned_sz));
-	ptr++;
 	heap.numblock++;
 	heap.heap_free -= (NAIVEBLOCK_SZ + aligned_sz);
-	return ((void *)ptr);
+	return ((void *) ++ptr);
 }
 
 /**
@@ -50,14 +47,14 @@ void *naive_malloc(size_t size)
 */
 naiveblock *naive_hopper(size_t size)
 {
-	size_t i = 0, tmp1 = 0;
+	size_t i = 0, total = 0;
 	naiveblock *pos;
 
 	pos = heap.naive_block;
 	for (; i < heap.numblock; i++)
 	{
-		tmp1 = pos->total_bytes;
-		pos = (naiveblock *)((char *)pos + sizeof(naiveblock) + tmp1);
+		total = pos->total_bytes;
+		pos = (naiveblock *)((char *)pos + sizeof(naiveblock) + total);
 	}
 	pos->total_bytes = size - NAIVEBLOCK_SZ;
 	return (pos);
