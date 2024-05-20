@@ -8,6 +8,9 @@ void _free(void *ptr)
 {
 	blockhead *block;
 
+	if (ptr == NULL)
+		return;
+
 	block = (blockhead *)ptr;
 	block->used_bytes = 0;
 }
