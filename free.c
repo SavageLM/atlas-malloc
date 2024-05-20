@@ -12,5 +12,6 @@ void _free(void *ptr)
 		return;
 
 	block = (blockhead *)ptr;
+	block--;
 	block->used_bytes = 0;
 }
