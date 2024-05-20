@@ -1,8 +1,5 @@
 #include "malloc.h"
 
-void make_lock(void) __attribute__((constructor));
-void break_lock(void) __attribute__((destructor));
-
 pthread_mutex_t lock;
 
 /**
@@ -24,20 +21,4 @@ void _free(void *ptr)
 	block--;
 	block->used_bytes = 0;
 	pthread_mutex_unlock(&lock);
-}
-
-/**
- * make_lock - Constructor for mutex lock
-*/
-void make_lock(void)
-{
-	pthread_mutex_init(&lock, NULL);
-}
-
-/**
- * break_lock - Destructor for mutex lock
-*/
-void break_lock(void)
-{
-	pthread_mutex_destroy(&lock);
 }
