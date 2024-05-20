@@ -7,10 +7,10 @@
  * @size: expected size of new memory allocation
  * Return: pointer to allocated memory, NULL upon allocation failure
  */
-void *_realloc(void *ptr, size_t size);
-void *_realloc(void *ptr, size_t old_size, size_t size)
+void *_realloc(void *ptr, size_t size)
 {
 	void *new_mem = NULL;
+	size_t old_size = 0;
 
 	if (!ptr)
 	{
@@ -18,9 +18,10 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 		if (!new_mem)
 			return (NULL);
 	}
+	old_size = (((blockhead *)ptr) - 1)->used_bytes;
 	if (old_size < size)
 	{
-		new_mem = malloc(size);
+		new_mem = _malloc(size);
 		if (!new_mem)
 			return (NULL);
 		memcpy(new_mem, ptr, old_size);
