@@ -15,7 +15,7 @@ void *_calloc(size_t nmemb, size_t size)
 
 	if (!nmemb || !size)
 		return (NULL);
-	memory = malloc(nmemb * size);
+	memory = _malloc(nmemb * size);
 	if (!memory)
 		return (NULL);
 	for (iter = 0, initialize = memory; iter != (size * nmemb); iter++)
