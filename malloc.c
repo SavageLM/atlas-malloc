@@ -53,7 +53,7 @@ blockhead *block_hopper(size_t size)
 
 	for (pos = heap.first_block; i < heap.numblock; i++)
 	{
-		if (pos->total_bytes >= size && !pos->used_bytes)
+		if (pos->total_bytes >= (size - BLOCK_SZ) && !pos->used_bytes)
 			return (pos);
 		total = pos->total_bytes;
 		used = pos->used_bytes;
