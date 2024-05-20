@@ -14,7 +14,6 @@ void *_malloc(size_t size)
 	size_t aligned_sz = ((size + 7) / 8) * 8;
 	blockhead *ptr = NULL;
 
-	/* printf("%lu\n", heap.numblock); */
 	if (!flag)
 	{
 		heap.first_block = sbrk(0);
@@ -36,12 +35,10 @@ void *_malloc(size_t size)
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
-	/* ptr->total_bytes = aligned_sz; */
-	/* ptr->used_bytes = aligned_sz; */
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	heap.numblock++;
 	heap.heap_free -= (BLOCK_SZ + aligned_sz);
-	return ((void *)++ptr);
+	return ((void *) ++ptr);
 }
 
 /**
