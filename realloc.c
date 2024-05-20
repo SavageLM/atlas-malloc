@@ -11,6 +11,11 @@ void *_realloc(void *ptr, size_t size)
 	void *new_mem = NULL;
 	size_t old_size = 0;
 
+	if (!size)
+	{
+		_free(ptr);
+		return (NULL);
+	}
 	if (!ptr)
 	{
 		new_mem = _malloc(size);
