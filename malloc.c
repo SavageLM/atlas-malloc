@@ -26,8 +26,7 @@ void *_malloc(size_t size)
 		heap.first_block->used_bytes = aligned_sz;
 		heap.heap_free = heap.heap_size - (BLOCK_SZ + aligned_sz);
 		heap.numblock = 1;
-		ptr = heap.first_block;
-		ptr++;
+		ptr = heap.first_block + 1;
 		flag = 1;
 		return ((void *) ptr);
 	}
@@ -36,8 +35,8 @@ void *_malloc(size_t size)
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
-	/* ptr->total_bytes = aligned_sz;
-	ptr->used_bytes = aligned_sz; */
+	/* ptr->total_bytes = aligned_sz; */
+	/* ptr->used_bytes = aligned_sz; */
 	ptr = block_hopper((BLOCK_SZ + aligned_sz));
 	ptr++;
 	heap.numblock++;
@@ -58,7 +57,7 @@ blockhead *block_hopper(size_t size)
 	pos = heap.first_block;
 	for (; i < heap.numblock; i++)
 	{
-		if (pos->total_bytes > size && !pos->used_bytes)
+		if (pos->total_bytes >= size && !pos->used_bytes)
 			return (pos);
 		if (size < (pos->total_bytes - pos->used_bytes))
 		{
