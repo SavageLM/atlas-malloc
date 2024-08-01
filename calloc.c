@@ -18,9 +18,11 @@ void *_calloc(size_t nmemb, size_t size)
 	pthread_mutex_lock(&lock);
 	if (!nmemb || !size)
 		return (NULL);
+	/*Calls malloc to allocate space*/
 	memory = _malloc(nmemb * size);
 	if (!memory)
 		return (NULL);
+	/*Initializes allocated memory to 0/NULL*/
 	for (iter = 0, initialize = memory; iter != (size * nmemb); iter++)
 		initialize[iter] = '\0';
 	pthread_mutex_unlock(&lock);

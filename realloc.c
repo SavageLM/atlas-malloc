@@ -20,6 +20,7 @@ void *_realloc(void *ptr, size_t size)
 		pthread_mutex_unlock(&lock);
 		return (NULL);
 	}
+	/*If pointer does not exist, calls malloc*/
 	if (!ptr)
 	{
 		new_mem = _malloc(size);
@@ -32,6 +33,7 @@ void *_realloc(void *ptr, size_t size)
 	else
 	{
 		old_size = (((blockhead *)ptr) - 1)->used_bytes;
+		/*If not enough memory, calls malloc to get more*/
 		if (old_size < size)
 		{
 			new_mem = _malloc(size);
@@ -40,6 +42,7 @@ void *_realloc(void *ptr, size_t size)
 				pthread_mutex_unlock(&lock);
 				return (NULL);
 			}
+			/*Copys memory data from pointer to new memory*/
 			memcpy(new_mem, ptr, old_size);
 			_free(ptr);
 		}

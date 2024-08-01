@@ -16,7 +16,7 @@ void _free(void *ptr)
 		pthread_mutex_unlock(&lock);
 		return;
 	}
-
+	/*Changes block data to show that memory is free to use*/
 	block = (blockhead *)ptr;
 	block--;
 	block->used_bytes = 0;
