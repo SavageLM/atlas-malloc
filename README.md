@@ -1,7 +1,12 @@
+![image](https://github.com/user-attachments/assets/770f3c9c-4a66-4282-abbf-764720603517)
+
+
 # C - Malloc
 
 ## Introduction
-> This README is for the C - Malloc project at Atlas.
+> This README is for the C - Malloc project at Atlas. The purpose of this project was to recreate the functionality of the C malloc Function.
+> Along with a simplified malloc and a full malloc, we also implemented a free, realloc, and calloc functions.
+> Many of the Challanges for this project came from trying to understand how malloc uses blocks of metadata for navigating newly created memory
 
 ### Requirements
 - Allowed editors: vi, vim, emacs
