@@ -30,6 +30,9 @@
 |calloc.c| Function(s) for recreating the calloc function|
 |realloc.c| Function(s) for recreating the realloc function|
 
-#### Authors
-Sammy Ansari    
-Logan Savage
+## Authors / Contact info
+* **Sammy Ansari** **|** [Github](https://github.com/O-01) **|** [LinkedIn](https://linkedin.com/in/sammy-ansari) **|** [Email](mailto:sam.ansari@atlasschool.com)
+* **Logan Savage** **|** [Github](https://github.com/SavageLM) **|** [LinkedIn](https://www.linkedin.com/in/logan-m-savage/) **|** [Email](mailto:logan.savage@atlasschool.com)  
+##
+![Atlas School](https://assets-global.website-files.com/6571f4826e9363343bcd2acd/658c333153345aa78869f0b3_logo-atlas-school-blue-lightning-bug.svg)
+##
